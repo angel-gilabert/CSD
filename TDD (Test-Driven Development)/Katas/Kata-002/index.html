@@ -53,6 +53,9 @@
         gap: 10px;
         margin-top: 12px;
       }
+      .actions .back-home {
+        background: #475569;
+      }
       button, .link-btn {
         border: 0;
         border-radius: 10px;
@@ -145,6 +148,7 @@
         <div class="actions">
           <button id="run-kata">Ejecutar kata</button>
           <button class="secondary" id="next-2">Siguiente paso</button>
+          <button class="back-home" id="back-home">Volver al paso principal</button>
         </div>
       </section>
 
@@ -159,6 +163,7 @@
         </table>
         <div class="actions">
           <button class="secondary" id="next-3">Siguiente paso</button>
+          <button class="back-home" id="back-home-3">Volver al paso principal</button>
         </div>
       </section>
 
@@ -169,6 +174,7 @@
         <div class="actions">
           <a class="link-btn" href="./calculadora.html">Abrir calculadora</a>
           <a class="link-btn secondary" href="./fizzbuzz.test.js">Ver código fuente</a>
+          <button class="back-home" id="back-home-4">Volver al paso principal</button>
         </div>
       </section>
     </main>
@@ -192,6 +198,9 @@
       document.getElementById('next-1').addEventListener('click', () => showStep(2));
       document.getElementById('next-2').addEventListener('click', () => showStep(3));
       document.getElementById('next-3').addEventListener('click', () => showStep(4));
+      document.getElementById('back-home').addEventListener('click', () => showStep(1));
+      document.getElementById('back-home-3').addEventListener('click', () => showStep(1));
+      document.getElementById('back-home-4').addEventListener('click', () => showStep(1));
 
       document.getElementById('run-kata').addEventListener('click', () => {
         const values = window.fizzBuzzZeroToHundred();
