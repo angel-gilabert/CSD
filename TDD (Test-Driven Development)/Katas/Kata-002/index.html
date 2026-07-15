@@ -172,6 +172,7 @@
         <p>Este apartado lista las funciones generadas para la calculadora, con su bloque de código y una explicación breve.</p>
         <div id="generated-functions"></div>
         <div class="actions">
+          <button id="rerun-kata">Volver a ejecutar la kata</button>
           <a class="link-btn" href="./calculadora.html">Abrir calculadora</a>
           <a class="link-btn secondary" href="./fizzbuzz.test.js">Ver código fuente</a>
           <button class="back-home" id="back-home-4">Volver al paso principal</button>
@@ -202,7 +203,7 @@
       document.getElementById('back-home-3').addEventListener('click', () => showStep(1));
       document.getElementById('back-home-4').addEventListener('click', () => showStep(1));
 
-      document.getElementById('run-kata').addEventListener('click', () => {
+      function renderResults() {
         const values = window.fizzBuzzZeroToHundred();
         const rows = [
           { input: 0, expected: 'FizzBuzz', actual: values[0] },
@@ -223,6 +224,18 @@
               <td class="${isPass ? 'green' : 'red'}">${isPass ? '✅ OK' : '❌ Fallo'}</td>
             </tr>`;
         }).join('');
+      }
+
+      document.getElementById('run-kata').addEventListener('click', () => {
+        renderResults();
+        showStep(3);
+      });
+
+      document.getElementById('rerun-kata').addEventListener('click', () => {
+        renderResults();
+        showStep(3);
+      });
+
 
         showStep(3);
       });
