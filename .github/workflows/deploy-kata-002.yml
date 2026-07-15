@@ -1,0 +1,25 @@
+name: Deploy Kata 002 to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Kata-002/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./Kata-002
+      - uses: actions/deploy-pages@v4
