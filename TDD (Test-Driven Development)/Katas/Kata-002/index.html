@@ -94,6 +94,21 @@
         border-radius: 12px;
         white-space: pre-wrap;
         overflow-x: auto;
+        margin-bottom: 12px;
+      }
+      .function-card {
+        background: #111827;
+        border: 1px solid #334155;
+        border-radius: 12px;
+        padding: 14px;
+        margin-bottom: 12px;
+      }
+      .function-card h3 {
+        margin-top: 0;
+        color: #38bdf8;
+      }
+      .function-card p {
+        color: #cbd5e1;
       }
       .hidden { display: none; }
     </style>
@@ -149,8 +164,8 @@
 
       <section class="panel hidden" id="step-4">
         <h2>Paso 4 — Generar código de la calculadora</h2>
-        <p>Se muestra un ejemplo de código fuente para la funcionalidad de la calculadora.</p>
-        <div class="code-box" id="calculator-code"></div>
+        <p>Este apartado lista las funciones generadas para la calculadora, con su bloque de código y una explicación breve.</p>
+        <div id="generated-functions"></div>
         <div class="actions">
           <a class="link-btn" href="./calculadora.html">Abrir calculadora</a>
           <a class="link-btn secondary" href="./fizzbuzz.test.js">Ver código fuente</a>
@@ -203,7 +218,11 @@
         showStep(3);
       });
 
-      document.getElementById('calculator-code').textContent = `function calculate(firstValue, secondValue, operator) {
+      const generatedFunctions = [
+        {
+          name: 'calculate(firstValue, secondValue, operator)',
+          description: 'Ejecuta la operación matemática seleccionada y devuelve el resultado o un mensaje de error si se divide entre cero.',
+          code: `function calculate(firstValue, secondValue, operator) {
   switch (operator) {
     case '+': return firstValue + secondValue;
     case '-': return firstValue - secondValue;
@@ -211,7 +230,46 @@
     case '/': return secondValue === 0 ? 'Error' : firstValue / secondValue;
     default: return secondValue;
   }
-}`;
+}`
+        },
+        {
+          name: 'equals()',
+          description: 'Toma el valor acumulado, aplica la operación pendiente y actualiza la pantalla con el resultado final.',
+          code: `function equals() {
+  if (!pendingOperator || storedValue === null) return;
+  const inputValue = parseFloat(currentValue);
+  const result = calculate(storedValue, inputValue, pendingOperator);
+  currentValue = String(result);
+  storedValue = null;
+  pendingOperator = null;
+  waitingForNextValue = false;
+  updateDisplay();
+}`
+        },
+        {
+          name: 'appendNumber(value)',
+          description: 'Inserta un dígito en la pantalla y controla si la calculadora está esperando un nuevo valor.',
+          code: `function appendNumber(value) {
+  if (waitingForNextValue) {
+    currentValue = value;
+    waitingForNextValue = false;
+  } else {
+    currentValue = currentValue === '0' ? value : currentValue + value;
+  }
+  updateDisplay();
+}`
+        }
+      ];
+
+      document.getElementById('generated-functions').innerHTML = generatedFunctions
+        .map((fn) => `
+          <article class="function-card">
+            <h3>${fn.name}</h3>
+            <p>${fn.description}</p>
+            <div class="code-box">${fn.code}</div>
+          </article>
+        `)
+        .join('');
 
       showStep(1);
     </script>
