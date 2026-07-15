@@ -1,5 +1,5 @@
-# CSD
-Curso de Certified Scrum Developer
+# ADGD337PO - CERTIFIED SCRUM DEVELOPER- CSD
+
 	
 	Julio 2026
 	CAS Training
