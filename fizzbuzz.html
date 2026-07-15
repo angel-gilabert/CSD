@@ -44,9 +44,18 @@
         border-radius: 12px;
         padding: 14px;
         min-height: 240px;
-        white-space: pre-wrap;
-        font-family: Consolas, monospace;
-        line-height: 1.5;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 8px 10px;
+        border-bottom: 1px solid #334155;
+        text-align: left;
+      }
+      th {
+        color: #38bdf8;
       }
       a { color: #38bdf8; }
     </style>
@@ -71,7 +80,24 @@
 
       function renderResults() {
         const results = window.fizzBuzzZeroToHundred ? window.fizzBuzzZeroToHundred() : [];
-        output.textContent = results.join('\n');
+        const rows = results.map((value, index) => `
+          <tr>
+            <td>${index}</td>
+            <td>${value}</td>
+          </tr>
+        `).join('');
+
+        output.innerHTML = `
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Resultado</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        `;
       }
 
       runBtn.addEventListener('click', () => {
